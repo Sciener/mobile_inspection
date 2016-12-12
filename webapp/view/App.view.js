@@ -13,15 +13,9 @@ sap.ui.jsview("sciener.mobile.inspection.view.App", {
 	 * @memberOf controller.App
 	 */
 	createContent: function(oController) {
-		var oPage = new sap.m.Page({
-			title: "{i18n>title}",
-			content: []
-		});
 
-		var app = new sap.m.App("myApp", {
-			initialPage: "oPage"
-		});
-		app.addPage(oPage);
+		var app = new sap.m.SplitApp("inspectionApp", {});
+
 		return app;
 	}
 

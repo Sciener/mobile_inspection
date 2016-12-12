@@ -1,0 +1,16 @@
+[{
+	"statusId": "1",
+	"Description": "New"
+}, {
+	"statusId": "2",
+	"Description": "In Action"
+}, {
+	"statusId": "3",
+	"Description": "Finished"
+}, {
+	"statusId": "4",
+	"Description": "Stoped"
+}, {
+	"statusId": "5",
+	"Description": "Сanceled"
+}]

@@ -1,0 +1,17 @@
+[{
+	"orderId": "0000010001",
+	"description": "Осмотр линии №1",
+	"beginPlanTimestamp": "/Date(1480539600000)/",
+	"finishPalnTimestamp": "/Date(1481317200000)/",
+	"beginFactTimestamp": "/Date(1480885200000)/",
+	"finishFactTimestamp": "/Date(1481058000000)/",
+	"status": "1",
+	"itemCount": 3
+}, {
+	"orderId": "0000010002",
+	"description": "Осмотр линии №2",
+	"beginPlanTimestamp": "/Date(1478552400000)/",
+	"finishPalnTimestamp": "/Date(1482440400000)/",
+	"beginFactTimestamp": "",
+	"itemCount": 0
+}]

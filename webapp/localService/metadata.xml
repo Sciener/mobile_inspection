@@ -1,7 +1,101 @@
 <edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:sap="http://www.sap.com/Protocols/SAPData">
 	<edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
 		<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="S1">
-			<EntityContainer Name="EC1" m:IsDefaultEntityContainer="true"></EntityContainer>
+		    <EntityType Name="OrderStatus">
+		    	<Key>
+		    		<PropertyRef  Name="statusId"/>
+		    	</Key>
+		    	<Property Name="statusId" Type="Edm.String" Nullable="false" sap:label=""></Property>
+		    	<Property Name="Description" Type="Edm.String" Nullable="true"></Property>
+		    </EntityType>
+		    
+		    <EntityType Name="User">
+		    	<Key>
+		    		<PropertyRef  Name="userId"/>
+		    	</Key>
+		    	<Property Name="userId" Type="Edm.String" Nullable="false" sap:label=""></Property>
+		    	<Property Name="Name" Type="Edm.String" Nullable="true"></Property>
+		    </EntityType>
+		    
+		    <EntityType Name="TechnicalObject">
+		    	<Key>
+		    		<PropertyRef  Name="objectId"/>
+		    	</Key>
+		    	<Property Name="objectId" Type="Edm.String" Nullable="false" sap:label=""></Property>
+		    	<Property Name="type" Type="Edm.String" Nullable="false" sap:label=""></Property>
+		    	<Property Name="description" Type="Edm.String" Nullable="true"></Property>
+		    </EntityType>
+		    
+		    <EntityType Name="Order">
+		    	<Key>
+		    		<PropertyRef  Name="orderId"/>
+		    	</Key>
+		    	<Property Name="orderId" Type="Edm.String" Nullable="false" sap:label="Order Number"></Property>
+		    	<Property Name="description" Type="Edm.String" MaxLength="60" Nullable="true" sap:label="Description"></Property>
+		    	<Property Name="beginPlanTimestamp" Type="Edm.DateTime" Nullable="true"></Property>
+		    	<Property Name="finishPalnTimestamp" Type="Edm.DateTime" Nullable="true"></Property>
+		    	<Property Name="beginFactTimestamp" Type="Edm.DateTime" Nullable="true"></Property>
+		    	<Property Name="finishFactTimestamp" Type="Edm.DateTime" Nullable="true"></Property>
+		    	<Property Name="plannerId" Type="Edm.String" Nullable="true"></Property>
+		    	<Property Name="executorId" Type="Edm.String" Nullable="true"></Property>
+		    	<Property Name="statusId" Type="Edm.String" Nullable="true"></Property>
+		    	<Property Name="itemCount" Type="Edm.Int32" Nullable="true"></Property>
+		    	<NavigationProperty Name="items" Relationship="S1.OrderOrderItems" ToRole="OrderItems" FromRole="Order"></NavigationProperty>
+		    </EntityType>
+		    <EntityType Name="OrderItem">
+		    	<Key>
+		    		<PropertyRef  Name="orderId"/>
+		    		<PropertyRef Name="itemId"/>
+		    	</Key>
+		    	<Property Name="orderId" Type="Edm.String" Nullable="false" sap:label=""></Property>
+		    	<Property Name="itemId" Type="Edm.String" Nullable="false" sap:label=""></Property>
+		    	<Property Name="description" Type="Edm.String" MaxLength="60" Nullable="true" sap:label="Description"></Property>
+		    	<Property Name="statusId" Type="Edm.String" Nullable="true"></Property>
+		    	<Property Name="statusSetDate" Type="Edm.DateTime" Nullable="true"></Property>
+		    	<Property Name="objectId" Type="Edm.String" Nullable="true"></Property>
+		    	<NavigationProperty Name="object" Relationship="S1.OrderItemTechnicalObject" ToRole="TechnicalObject" FromRole="OrderItems"></NavigationProperty>
+		    </EntityType>
+		    <Association Name="OrderOrderItems">
+		    	<End Type="S1.Order" Role="Order" Multiplicity="1"></End>
+		    	<End Type="S1.OrderItem" Role="OrderItems" Multiplicity="*"></End>
+		    	<ReferentialConstraint>
+		    		<Principal Role="Order">
+		    			<PropertyRef Name="orderId"/>
+		    		</Principal>
+		    		<Dependent Role="OrderItems">
+		    			<PropertyRef Name="orderId"/>
+		    		</Dependent>
+		    	</ReferentialConstraint>
+		    </Association>
+		    
+		    <Association Name="OrderItemTechnicalObject">
+		    	<End Type="S1.TechnicalObject" Role="TechnicalObject" Multiplicity="1"></End>
+		    	<End Type="S1.OrderItem" Role="OrderItems" Multiplicity="*"></End>
+		    	<ReferentialConstraint>
+		    		<Principal Role="TechnicalObject">
+		    			<PropertyRef Name="objectId"/>
+		    		</Principal>
+		    		<Dependent Role="OrderItems">
+		    			<PropertyRef Name="objectId"/>
+		    		</Dependent>
+		    	</ReferentialConstraint>
+		    </Association>
+		    
+			<EntityContainer Name="EC1" m:IsDefaultEntityContainer="true">
+			    <EntitySet Name="OrdesStatuses" EntityType="S1.OrderStatus"></EntitySet>
+			    <EntitySet Name="Orders" EntityType="S1.Order"></EntitySet>
+			    <EntitySet Name="OrderItems" EntityType="S1.OrderItem"></EntitySet>
+			    <EntitySet Name="Users" EntityType="S1.User"></EntitySet>
+			    <EntitySet Name="TechnicalObjects" EntityType="S1.TechnicalObject"></EntitySet>
+			    <AssociationSet Name="OrderOrderItems" Association="S1.OrderOrderItems">
+			    	<End Role="Order" EntitySet="Orders" ></End>
+			    	<End Role="OrderItems"  EntitySet="OrderItems"></End>
+			    </AssociationSet>
+			    <AssociationSet Name="OrderItemTechnicalObject" Association="S1.OrderItemTechnicalObject">
+			    	<End Role="TechnicalObject" EntitySet="TechnicalObjects" ></End>
+			    	<End Role="OrderItems"  EntitySet="OrderItems"></End>
+			    </AssociationSet>
+			</EntityContainer>
 		</Schema>
 	</edmx:DataServices>
 </edmx:Edmx>

@@ -23,7 +23,54 @@ sap.ui.define([
 				"phone": "",
 				"phone@2": "",
 				"tablet": "",
-				"tablet@2": ""
+				"tablet@2": "",
+				serviceConfig: {
+					name: "ZPM_MOBILE_INSPECTION",
+					serviceUrl: "/sap/opa/odata/sap/ZPM_MOBILE_INSPECTION/"
+				},
+				appConfig:{
+				    
+				}
+			},
+			routing: {
+				config: {
+					routerClass: "sap.m.routing.Router",
+					viewType: "JS",
+					viewPath: "sciener.mobile.inspection.view", 
+					controlId: "inspectionApp",
+					bypassed: {
+						target: ["master", "empty"]
+					}
+				},
+				routes: [
+					{
+						pattern: "",
+						name: "orderList",
+						target: [ "empty","master"]
+					},
+					{
+						pattern: "order/{orderId}",
+						name: "orderDetais",
+						target: ["master", "object"]
+					}
+				],
+				targets: {
+					master: {
+						viewName: "WorkOrderList",
+						viewLevel: 1,
+						controlAggregation: "masterPages"
+					},
+					object: {
+						viewName: "WorkOrderDetails",
+						viewLevel: 2,
+						controlAggregation: "detailPages"
+					},
+					empty: {
+						viewName: "Home",
+						viewLevel: 3,
+						controlAggregation: "detailPages"
+					}
+				}
 			}
 		},
 
@@ -36,11 +83,23 @@ sap.ui.define([
 		init: function() {
 			var mConfig = this.getMetadata().getConfig();
 
+            this.setModel(models.createODataModel(mConfig.serviceConfig.serviceUrl,{}));
 			// set the i18n model
 			this.setModel(models.createResourceModel(mConfig.i18nBundle), "i18n");
+			this.setModel(models.createDeviceModel(), "device");
+			this.setModel(models.createJSONModel(mConfig.serviceConfig.appConfig), "appConfig");
 
 			// call the base component's init function
 			UIComponent.prototype.init.apply(this, arguments);
+			this.getRouter().initialize();
+		},
+		
+		destroy: function() {
+			this.getModel().destroy();
+			this.getModel("i18n").destroy();
+			this.getModel("device").destroy();
+
+			UIComponent.prototype.destroy.apply(this, arguments);
 		}
 	});
 });

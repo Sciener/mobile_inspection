@@ -14,6 +14,11 @@
       "templateId": "ui5template.basicSAPUI5ApplicationProject",
       "templateVersion": "1.28.4",
       "dateTimeStamp": "Mon, 05 Dec 2016 17:39:04 GMT"
+    },
+    {
+      "templateId": "ui5template.basicSAPUI5ApplicationComponent",
+      "templateVersion": "1.4.0",
+      "dateTimeStamp": "Wed, 07 Dec 2016 05:05:48 GMT"
     }
   ],
   "translation": {
@@ -40,10 +45,10 @@
     "appNamespace": "sciener.mobile.inspection"
   },
   "mockpreview": {
-    "mockUri": "/sap/opa/odata/sap/ZPM_MOBILE_INSPECTION",
+    "mockUri": "/sap/opa/odata/sap/ZPM_MOBILE_INSPECTION/",
     "metadataFilePath": "localService/metadata.xml",
     "mockRequestsFilePath": "",
-    "loadJSONFiles": false,
+    "loadJSONFiles": true,
     "loadCustomRequests": false
   }
 }

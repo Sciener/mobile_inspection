@@ -1,0 +1,22 @@
+[{
+	"orderId": "0000010001",
+	"itemId": "10",
+	"description": "Осмотр",
+	"objectId": "T-10",
+	"statusId": "1",
+	"statusSetDate": "/Date(1481144400000)/"
+}, {
+	"orderId": "0000010001",
+	"itemId": "20",
+	"description": "Осмотр",
+	"statusId": "2",
+	"statusSetDate": "/Date(1480971600000)/",
+	"objectId": "T-20"
+}, {
+	"orderId": "0000010001",
+	"itemId": "30",
+	"description": "Осмотр",
+	"statusId": "1",
+	"statusSetDate": "/Date(1482354000000)/",
+	"objectId": "T-30"
+}]
