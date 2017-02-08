@@ -53,8 +53,30 @@ sap.ui.jsview("sciener.mobile.inspection.view.WorkOrderDetails", {
 		var oPage = new sap.m.Page({
 		    showNavButton:"{device>/system/phone}",
 			title: "{i18n>orderDetails}",
-			headerContent:[ new sap.m.Button("btn",{icon:"sap-icon://home", press: [oController.onGoHome, oController]})],
-			content: [oTabBar]
+			//headerContent:[ new sap.m.Button("btn",{icon:"sap-icon://bar-code", press: [oController.onGoHome, oController]})],
+			content: [oTabBar],
+			showFooter: true,
+			footer: new sap.m.OverflowToolbar({
+			    content: [ 
+			        new sap.m.ToolbarSpacer(),
+			        new sap.m.Button(this.createId("idStart"), {
+			        type:sap.m.ButtonType.Accept,
+			        text:"Start",
+			        icon:"sap-icon://play"
+			    }),
+			    new sap.m.Button(this.createId("idStop"), {
+			        type:sap.m.ButtonType.Emphasized,
+			        text:"Pause",
+			        icon:"sap-icon://pause"
+			    }),
+			    new sap.m.Button(this.createId("idFinish"), {
+			        type:sap.m.ButtonType.Reject,
+			        text:"Finish",
+			        icon:"sap-icon://stop"
+			    }),
+			    new sap.m.ToolbarSpacer()
+			    ]
+			})
 		});
 
 		return oPage;

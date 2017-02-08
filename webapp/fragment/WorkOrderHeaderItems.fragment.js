@@ -5,14 +5,16 @@ sap.ui.jsfragment ( "sciener.mobile.inspection.fragment.WorkOrderHeaderItems",{
 	        title: "{objectId} - {object/description}",
 	        info: "{statusId}",
 	        infoState:sap.ui.core.ValueState.Success,
-	        type: "Navigation"
+	        type: "Navigation",
+	        press: [oController.onPressListItem, oController]
 	    });
 	    var oOrderItemList =   new sap.m.List(this.createId("idWorkOrderHeaderItemsList"),{});
 	    
         oOrderItemList.bindItems({
     				path : "items",
     				template : oOrderItemListTemplate,
-    				parameters : {expand : "object"}});
+    				parameters : {expand : "object"}
+        });
              
         return  oOrderItemList;
 	} 

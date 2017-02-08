@@ -1,9 +1,9 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
-], function(Controller) {
+	"sciener/mobile/inspection/controller/Base.controller"
+], function(BaseController) {
 	"use strict";
 
-	return Controller.extend("sciener.mobile.inspection.controller.WorkOrderDetails", {
+	return BaseController.extend("sciener.mobile.inspection.controller.WorkOrderDetails", {
 
 		/**
 		 * Called when a controller is instantiated and its View controls (if available) are already created.
@@ -59,8 +59,17 @@ sap.ui.define([
 		onGoHome:function(oEvent){
 		     var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 		     oRouter.navTo("orderList");
+		},
+		
+		onPressListItem: function(oEvent){
+		    var oItem = oEvent.getSource();
+			var oCtx = oItem.getBindingContext();
+			this.getRouter().navTo("orderItemDetais",{
+				orderId : oCtx.getProperty("orderId"),
+				itemId : oCtx.getProperty("itemId")
+				
+			});
 		}
-
 	});
 
 });

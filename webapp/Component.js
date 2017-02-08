@@ -46,26 +46,36 @@ sap.ui.define([
 					{
 						pattern: "",
 						name: "orderList",
-						target: [ "empty","master"]
+						target: ["home","orderList"]
 					},
 					{
 						pattern: "order/{orderId}",
 						name: "orderDetais",
-						target: ["master", "object"]
+						target: ["orderList", "orderDetalis"]
+					},
+					{
+						pattern: "order/{orderId}/item/{itemId}",
+						name: "orderItemDetais",
+						target: ["orderList", "itemDetals"]
 					}
 				],
 				targets: {
-					master: {
+					orderList: {
 						viewName: "WorkOrderList",
 						viewLevel: 1,
 						controlAggregation: "masterPages"
 					},
-					object: {
+					orderDetalis: {
 						viewName: "WorkOrderDetails",
 						viewLevel: 2,
 						controlAggregation: "detailPages"
 					},
-					empty: {
+					itemDetals:{
+					    viewName: "WorkOrderItemDetails",
+						viewLevel: 3,
+						controlAggregation: "detailPages"
+					},
+					home: {
 						viewName: "Home",
 						viewLevel: 3,
 						controlAggregation: "detailPages"

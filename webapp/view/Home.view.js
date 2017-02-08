@@ -15,7 +15,26 @@ sap.ui.jsview("sciener.mobile.inspection.view.Home", {
 	createContent: function(oController) {
 		var oPage = new sap.m.Page({
 			title: "Home",
-			content: []
+			content: [],
+			footer: new sap.m.OverflowToolbar({
+			    content: [ 
+			 //       new sap.m.Button("idStart", {
+			 //       type:sap.m.ButtonType.Accept,
+			 //       text:"Start",
+			 //       icon:"sap-icon://play"
+			 //   }),
+			 //   new sap.m.Button("idStop", {
+			 //       type:sap.m.ButtonType.Emphasized,
+			 //       text:"Pause",
+			 //       icon:"sap-icon://pause"
+			 //   }),
+			 //   new sap.m.Button("idFinish", {
+			 //       type:sap.m.ButtonType.Reject,
+			 //       text:"Finish",
+			 //       icon:"sap-icon://stop"
+			 //   })
+			    ]
+			})
 		});
 
 		return oPage;

@@ -29,8 +29,38 @@ sap.ui.jsview("sciener.mobile.inspection.view.WorkOrderList", {
                 })
         });
 		var oPage = new sap.m.Page({
+		    subHeader:new sap.m.Bar({
+			    contentMiddle: new sap.m.SearchField({})
+			}),
 			title: "Workorders",
-			content: [oOrderList]
+			content: [oOrderList],
+			footer: new sap.m.OverflowToolbar({
+			    content:[
+			       new sap.m.Button(this.createId("idShare"), {
+			        icon:"sap-icon://action"
+			         }),
+			        new sap.m.ToolbarSpacer(),
+			        new sap.m.Select({
+			        type:"IconOnly",
+			        autoAdjustWidth: true,
+			        icon:"sap-icon://filter",
+			        items: [
+			            new sap.ui.core.Item({ 
+			                text: "New"
+			            }),
+			            new sap.ui.core.Item({ 
+			                text: "In Action"
+			            }),
+			            new sap.ui.core.Item({ 
+			                text: "Paused"
+			            }),
+			            new sap.ui.core.Item({ 
+			                text: "Clear"
+			            })
+			            ]
+			    })
+			    ]
+			})
 		});
 		return oPage;
 	}
